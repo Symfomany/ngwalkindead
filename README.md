@@ -1,10 +1,4 @@
-### Angular Project Seed
-
-For revise or begin, this is a stupid simple Angular Architecture Project 
-to handler Angular StyleGuide & Components Philophy
-
-Follow Angular StyleGuide
-https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md
+# Angular WalkinDead Pedagogic App
 
 * Angular 1
 * Components Philosophy
@@ -23,6 +17,7 @@ https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md
 * SASS
 * Service, Factory, Directive & Filters
 
+# Installation
 
 To install this architecture:
 clone that, then:
