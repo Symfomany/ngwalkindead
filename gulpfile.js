@@ -13,7 +13,6 @@ var sass = require('gulp-sass');
 var size = require('gulp-size');
 var uncss = require('gulp-uncss');
 var filter = require('gulp-filter');
-var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var notify = require("gulp-notify");
 var minifyCss = require('gulp-minify-css');
@@ -24,10 +23,38 @@ var cache = require('gulp-cache');
 var imagemin = require('gulp-imagemin');
 var sourcemaps = require('gulp-sourcemaps');
 var plumber = require('gulp-plumber');
+var ngmin = require('gulp-ngmin');
+
+//add
+let gutil = require("gulp-util");
+let path = require('path');
+let jshint = require('gulp-jshint');
+let stylish = require('jshint-stylish');
+let templateCache = require('gulp-angular-templatecache');
 
 
 //init tyo reload brower
 var reload = browserSync.reload;
+
+
+/**
+ * Handler Errors
+ * @param {any} err
+ */
+function handleError(err) {
+    console.log("************************************************** ERRORS*******************************************************");
+    gutil.log('error', 'An error to compile/transpile', gutil.colors.bold.dim.white.bgRed(err.toString()));
+    console.log(err.toString());
+    console.log("************************************************** ERRORS*******************************************************");
+    notifier.notify({
+        title: ' Erreur de Compilation ',
+        message: err.toString(),
+        icon: path.join(__dirname, 'js.jpg'),
+        sound: true,
+        wait: true
+    });
+    this.emit('end');
+}
 
 
 // Browser-sync task, only cares about compiled CSS
@@ -52,6 +79,19 @@ gulp.task('clean', function() {
         .pipe(clean());
 });
 
+
+/**
+ * Compress images
+ * @return {Stream}
+ */
+gulp.task('images', ['clean-images'], function() {
+    return gulp
+        .src('./images')
+        .pipe(imagemin({ optimizationLevel: 4 }))
+        .pipe(gulp.dest('dist/images'));
+});
+
+
 // Sass task, will run when any SCSS files change.
 gulp.task('css', function() {
     return gulp.src('sass/main.scss')
@@ -75,20 +115,25 @@ gulp.task('css', function() {
 gulp.task('js', function() {
     // Order By initi, filters, controllers...
     return gulp.src([ //ordre a respecter
-            "app/app.js",
-            "app/routes.js",
-            "app/shared/factories/*.factory.js", //all controllers
-            "app/shared/filters/*.filter.js", //all controllers
-            "app/shared/directives/*.directive.js", //all controllers
-            "app/**/*.controller.js" //all controllers
-        ])
-        .pipe(sourcemaps.init())
+        "app/app.js",
+        "app/constants.js",
+        "app/routes.js",
+        "app/shared/factories/*.factory.js", //all controllers
+        "app/shared/filters/*.filter.js", //all controllers
+        "app/shared/directives/*.directive.js", //all controllers
+        "app/**/*.controller.js" //all controllers
+    ]).on('error', handleError)
+
+    .pipe(jshint()).on('error', handleError)
         .pipe(plumber({
             errorHandler: notify.onError("Error: <%= error.message %>")
         })) // débogage de mes pipes
+        .pipe(jshint.reporter(stylish))
+        .pipe(sourcemaps.init())
         .pipe(concat('app.min.js'))
         .pipe(sourcemaps.write('.'))
-        //.pipe(uglify()) //minify js
+        //.pipe(ngmin({ dynamic: true }))
+        //.pipe(templateCache()) //template cache for layout
         .pipe(gulp.dest('dist/js')) // repertoire distant
         .pipe(notify("Js Modifié")); // notification
 });
@@ -109,8 +154,8 @@ gulp.task('images', function() {
 gulp.task('default', ['browser-sync', 'css', 'js'], function() {
     gulp.watch("sass/**/*.scss", ['css']); // watch permet de regarder les changements de fichier et lancer les tâches que l'on souhaite
     // gulp.watch("assets/images/", ['images']);
-    gulp.watch("app/**/**/*.js", ['js']);
-    // gulp.watch(["*.html", "partials/*.html"]).on('change', browserSync.reload); //reload on HTML
+    gulp.watch(["app/**/**/*.js", "app/**/*.js", "app/*.js"], ['js']);
+    gulp.watch(["*.html", "partials/*.html", "app/**/*.html"]).on('change', browserSync.reload); //reload on HTML
     gulp.src('*').pipe(size());
 
 });

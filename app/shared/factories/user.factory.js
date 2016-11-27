@@ -21,15 +21,16 @@
 
         return obj;
 
+
         /**
          * get All User
          */
         function getAll() {
             var deferred = $q.defer();
-            $http.get('https://jsonplaceholder.typicode.com/users')
+            $http.get("http://localhost:3000/db")
                 .success(function(data) {
                     deferred.resolve(data);
-                    $log.info('API chargée');
+                    $log.info('API chargee :)');
                 }).error(deferred.reject);
             return deferred.promise; //return a promise with $q library (not exist in ES5)
         }
