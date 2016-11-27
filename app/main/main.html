@@ -1,19 +1,158 @@
 <div class="row">
-    <div class="col s4 m4" ng-repeat="user in main.users track by user.id">
-        <div class="card blue-grey darken-1">
-            <div class="card-content white-text">
-                <div class="card-image">
-                    <img ng-src="{{ user.photo }}" />
-                    <span class="card-title">{{ user.pseudo }}</span>
+
+    <map users="main.users" coords="{lat:45.764043, lng:4.835659}"></map>
+    <nav>
+        <div class="nav-wrapper">
+            <form>
+                <div class="input-field">
+                    <input ng-model="main.search" id="search" type="search" required>
+                    <label for="search"><i class="material-icons">search</i></label>
+                    <i class="material-icons">close</i>
                 </div>
-                <div class="card-content">
-                    <p>{{ user.resume }}</p>
+            </form>
+        </div>
+    </nav>
+    <p>
+        <input class="with-gap" name="group1" checked type="radio" id="tous" />
+        <label for="tous">Tous</label>
+        <input class="with-gap" name="group1" type="radio" id="Masculin" />
+        <label for="Masculin">Masculin</label>
+        <input class="with-gap" name="group1" type="radio" id="Feminin" />
+        <label for="Feminin">Feminin</label>
+    </p>
+    <p class="range-field">
+        <input ng-model="main.age" type="range" id="test5" min="0" max="100" />
+        <span>Age: {{ main.age }} ans</span>
+    </p>
+
+    <div class="right-align">
+        <a class="waves-effect waves-light btn"><i class="material-icons">view_list</i></a>
+        <a class="waves-effect waves-light btn"><i class="material-icons">map</i></a>
+    </div>
+
+    <div class="col s12 cards-container">
+        <div id="users" masonry='{ "transitionDuration" : "0.4s" , "itemSelector" : ".tile"}'>
+            <div masonry-tile class="card blue-grey darken-1" ng-repeat="user in main.users|filter: main.search track by user.id">
+                <div class="card-content white-text">
+                    <h3 class="card-title"><i class="material-icons">cake</i> {{ user.pseudo }} <span class="badge">{{ main.displayAge(user.naissance) }} ans</span></h3>
+                    <p>Sexe: {{ user.sexe }}</p>
+                    <img class="responsive-img  col s7" ng-src="{{ user.photo }}" />
+                    <p><small>{{ user.resume }}</small></p>
+
                 </div>
                 <div class="card-action">
-                    <a href="#">This is a link</a>
+                    <a href="#/user/{{ user.pseudo }}"><i class="material-icons">search</i> Voir le profil</a>
+                    <a ng-click="main.remove(user)"><i class="material-icons">highlight_off</i> Supprimer</a>
                 </div>
             </div>
-
         </div>
+    </div>
+
+    <div class="row">
+        <a href="#modal1" class="btn waves-effect waves-light">
+            <i class="material-icons right">send</i> Créer un personnage
+        </a>
+
+        <!-- Modal Structure -->
+        <h3>Ajout de personnage</h3>
+        <section class="col m12">
+            <form name="addPerso" novalidate ng-submit="ajout.ajouterPerso()">
+                <div class="formulaire">
+                    <div class="row">
+                        <div input-field class="col m8">
+                            <input type="text" name="pseudo" ng-model="ajout.pseudo" required ng-minlength="2" ng-maxlength="30" length="30">
+                            <label>Prénom et nom</label>
+                            <span class="text-danger" ng-show="addPerso.pseudo.$error.required">
+                    Champ obligatoire
+                </span>
+                        </div>
+                        <div class="switch col m4">
+                            Sexe :
+                            <label>
+                    Femme
+                    <input type="checkbox" value="true" ng-model="ajout.sexe">
+                    <span class="lever"></span>
+                    Homme
+                </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div input-field class="col m6">
+                            <input type="text" name="activite" ng-model="ajout.activite" required>
+                            <label>Activité</label>
+                            <span class="text-danger" ng-show="addPerso.activite.$error.required">
+                    Champ obligatoire
+                </span>
+                        </div>
+                        <div input-field class="col m6">
+                            <md-datepicker ng-model="myDate" name="dateField" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div input-field class="col m12">
+                            <input type="text" name="url" ng-model="ajout.photo" required>
+                            <label>Url de la photo</label>
+                            <span class="text-danger" ng-show="addPerso.url.$error.required">
+                    Champ obligatoire
+                </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div input-field class="col m6">
+                            <input type="text" name="pays" ng-model="ajout.pays" required>
+                            <label>Pays</label>
+                            <span class="text-danger" ng-show="addPerso.pays.$error.required">
+                    Champ obligatoire
+                </span>
+                        </div>
+                        <div input-field class="col m3">
+                            <input type="text" name="lat" ng-model="ajout.lat" required>
+                            <label>Latitude</label>
+                            <span class="text-danger" ng-show="addPerso.lat.$error.required">
+                    Champ obligatoire
+                </span>
+                        </div>
+                        <div input-field class="col m3">
+                            <input type="text" name="long" ng-model="ajout.long" required>
+                            <label>Longitude</label>
+                            <span class="text-danger" ng-show="addPerso.long.$error.required">
+                    Champ obligatoire
+                </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div input-field class="col m12">
+                            <textarea ng-model="ajout.bio" class="materialize-textarea"></textarea>
+                            <label>Biographie</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col m8">
+                            <span class="saisons">Saisons : </span>
+                            <input type="checkbox" ng-model="ajout.saisons.s1" id="s1" />
+                            <label for="s1">1</label>
+                            <input type="checkbox" ng-model="ajout.saisons.s2" id="s2" />
+                            <label for="s2">2</label>
+                            <input type="checkbox" ng-model="ajout.saisons.s3" id="s3" />
+                            <label for="s3">3</label>
+                            <input type="checkbox" ng-model="ajout.saisons.s4" id="s4" />
+                            <label for="s4">4</label>
+                            <input type="checkbox" ng-model="ajout.saisons.s5" id="s5" />
+                            <label for="s5">5</label>
+                            <input type="checkbox" ng-model="ajout.saisons.s6" id="s6" />
+                            <label for="s6">6</label>
+                            <input type="checkbox" ng-model="ajout.saisons.s7" id="s7" />
+                            <label for="s7">7</label>
+                        </div>
+                        <div class="col m4">
+                            <button class="btn waves-effect waves-light" type="submit" name="action" ng-disabled="addPerso.$invalid">Ajouter le personnage</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+
 
     </div>
+    <hr />

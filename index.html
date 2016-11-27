@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" ng-app="app">
+<html lang="fr" ng-app="app" ng-cloak>
 
 <head>
     <meta charset="utf-8">
@@ -11,11 +11,8 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
     <link rel="stylesheet" href="bower_components/animate.css/animate.min.css" charset="utf-8">
-    <link rel='stylesheet' href='bower_components/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' />
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css" charset="utf-8">
 
-
-    <!-- My Css -->
-    <link rel="stylesheet" href="./dist/css/main.min.css" media="screen" title="no title" charset="utf-8">
 
     <!-- Jquery-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
@@ -25,21 +22,19 @@
 
 
     <!--All scripts are in head beceause is more fast to load -->
-
-
     <!-- Librairie Angular -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 
 
     <!-- Librairie Angular Animate -->
     <script src="bower_components/angular-animate/angular-animate.js" charset="utf-8"></script>
+    <script src="bower_components/angular-aria/angular-aria.min.js" charset="utf-8"></script>
+    <script src="bower_components/angular-messages/angular-messages.min.js" charset="utf-8"></script>
+    <script src="bower_components/angular-material/angular-material.min.js" charset="utf-8"></script>
 
     <!--Google MAP-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUO9bGSDODUZfUjbtaYeuoy8VGimyhGM">
     </script>
-
-    <!-- Librairie Angular Loading Bar -->
-    <script src="bower_components/angular-loading-bar/build/loading-bar.min.js" charset="utf-8"></script>
 
     <!-- Librairie Angular Messages -->
     <!--<script src="bower_components/angular-messages/angular-messages.min.js" charset="utf-8"></script>-->
@@ -66,11 +61,25 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-route.min.js"></script>
 
+
+    <script src="bower_components/angular-masonry-directive/src/angular-masonry-directive.js"></script>
+    <script src="bower_components/moment/min/moment-with-locales.min.js"></script>
+
     <!--Angular Google Map-->
     <!--<script src='./bower_components/angular-google-maps/dist/angular-google-maps.min.js'></script>-->
 
     <!-- Angular Minimyfy by GULP -->
     <script src="./dist/js/app.min.js" charset="utf-8 "></script>
+
+    <script>
+        var options = [{
+            selector: '.card',
+            offset: 200
+        }];
+        Materialize.scrollFire(options);
+    </script>
+    <!-- My Css -->
+    <link rel="stylesheet" href="./dist/css/main.min.css" media="screen" title="no title" charset="utf-8">
 
 </head>
 
@@ -79,13 +88,11 @@
     <div ng-include=" 'app/layout/header.html' "></div>
     <!--Menu Naviguation-->
 
-    <div id="loading-bar-container">
-    </div>
-
     <!--All views loaded here-->
     <!-- angular templating -->
-    <div class="page" ng-view></div>
-
+    <div class="container">
+        <div class="page" ng-view></div>
+    </div>
 </body>
 
 

@@ -27,6 +27,132 @@
     z-index: 9999;
 }
 
+#users .card.ng-leave {
+    -webkit-animation: tada 1s;
+    -moz-animation: tada 1s;
+    -ms-animation: tada 1s;
+    animation: tada 1s;
+}
+
+
+/* invalid color */
+
+.input-field input[type=text].ng-invalid {
+    /*border-bottom: 1px solid #F44336;
+box-shadow: 0 1px 0 0 #F44336;*/
+}
+
+.help-block {
+    color: #F44336;
+    font-size: 12px;
+}
+
+.angular-google-map-container {
+    height: 600px;
+}
+
+.angular-google-map {
+    height: 600px;
+}
+
+
+/* ANIMATIONS
+============================================================================= */
+
+
+/* leaving animations ----------------------------------------- */
+
+
+/* rotate and fall */
+
+@keyframes rotateFall {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    20% {
+        transform: rotateZ(10deg);
+        animation-timing-function: ease-out;
+    }
+    40% {
+        transform: rotateZ(17deg);
+    }
+    60% {
+        transform: rotateZ(16deg);
+    }
+    100% {
+        transform: translateY(100%) rotateZ(17deg);
+    }
+}
+
+
+/* slide in from the bottom */
+
+@keyframes slideOutLeft {
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+
+/* rotate out newspaper */
+
+@keyframes rotateOutNewspaper {
+    to {
+        transform: translateZ(-3000px) rotateZ(360deg);
+        opacity: 0;
+    }
+}
+
+
+/* entering animations --------------------------------------- */
+
+
+/* scale up */
+
+@keyframes scaleUp {
+    from {
+        opacity: 0.3;
+        -webkit-transform: scale(0.8);
+    }
+}
+
+
+/* slide in from the right */
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+
+/* slide in from the bottom */
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.ng-leave {
+    animation: slideOutLeft 0.5s both ease-in;
+    z-index: 9999;
+}
+
+.ng-enter {
+    z-index: 8888;
+}
+
+.ng-leave {
+    z-index: 9999;
+}
+
 
 /**
 * For GMap
@@ -48,4 +174,67 @@ form input.ng-invalid.ng-touched {
 
 form input.ng-valid.ng-touched {
     background-color: #78FA89;
+}
+
+// Media Query Ranges
+$small-screen-up: 601px !default;
+$medium-screen-up: 993px !default;
+$large-screen-up: 1201px !default;
+$small-screen: 600px !default;
+$medium-screen: 992px !default;
+$large-screen: 1200px !default;
+$medium-and-up: "only screen and (min-width : #{$small-screen-up})" !default;
+$large-and-up: "only screen and (min-width : #{$medium-screen-up})" !default;
+$small-and-down: "only screen and (max-width : #{$small-screen})" !default;
+$medium-and-down: "only screen and (max-width : #{$medium-screen})" !default;
+$medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width : #{$medium-screen})" !default;
+@mixin column-count($ct) {
+    -webkit-column-count: $ct;
+    -moz-column-count: $ct;
+    column-count: $ct;
+}
+
+.cards-container {
+    column-break-inside: avoid;
+    .card {
+        display: inline-block;
+        overflow: visible;
+    }
+}
+
+@media #{$small-and-down} {
+    .cards-container {
+        @include column-count(1);
+    }
+}
+
+@media #{$medium-and-up} {
+    .cards-container {
+        @include column-count(2);
+    }
+}
+
+@media #{$large-and-up} {
+    .cards-container {
+        @include column-count(3);
+    }
+}
+
+/// Styles for demo
+.text-center {
+    text-align: center;
+}
+
+.datepickerdemoBasicUsage {
+    /** Demo styles for mdCalendar. */
+}
+
+.datepickerdemoBasicUsage md-content {
+    padding-bottom: 200px;
+}
+
+.datepickerdemoBasicUsage .validation-messages {
+    font-size: 12px;
+    color: #dd2c00;
+    margin-left: 15px;
 }

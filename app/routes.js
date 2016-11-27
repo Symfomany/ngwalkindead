@@ -22,6 +22,16 @@
                     }
                 }
             })
+            .when('/user/:pseudo', {
+                templateUrl: 'app/user/user.html',
+                controller: 'userCtrl',
+                controllerAs: 'main', // with alias in view for ANgular StyleGuide
+                resolve: { // resolve Factory before display view and send by injection in controller
+                    user: function(UserFcty, $routeParams) {
+                        return UserFcty.one('Michonne');
+                    }
+                }
+            })
             .when('/contact', {
                 templateUrl: 'app/contact/contact.html',
                 controller: 'contactCtrl',

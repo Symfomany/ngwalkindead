@@ -16,7 +16,8 @@
     function UserFcty($log, $q, $http) {
 
         var obj = {
-            all: getAll
+            all: getAll,
+            one: getOne
         };
 
         return obj;
@@ -35,6 +36,17 @@
             return deferred.promise; //return a promise with $q library (not exist in ES5)
         }
 
+        /**
+         * get All User
+         */
+        function getOne(pseudo) {
+            var deferred = $q.defer();
+            $http.get("http://localhost:3000/db?pseudo=" + pseudo)
+                .success(function(data) {
+                    deferred.resolve(data);
+                }).error(deferred.reject);
+            return deferred.promise; //return a promise with $q library (not exist in ES5)
+        }
 
     }
 
