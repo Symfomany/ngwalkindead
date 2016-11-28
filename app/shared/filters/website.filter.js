@@ -79,7 +79,6 @@
     function sexe() {
 
         return function(sexe) {
-            console.log();
             if (sexe === false) {
                 return "Femme";
             }
@@ -88,6 +87,28 @@
         };
     }
 
+
+    /**
+     * 3eme syntax
+     * Filter Age Month
+     */
+
+    angular.module('app').filter('sexeFil', sexeFil);
+
+    function sexeFil() {
+
+        return function(input, sexe) {
+            if (!sexe) {
+                return input;
+            }
+
+            return _.filter(input, function(user) {
+                return user.sexe == sexe;
+            });
+
+
+        };
+    }
     /**
      * 3eme syntax
      * Filter Age Month
