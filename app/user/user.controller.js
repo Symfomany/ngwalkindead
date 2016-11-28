@@ -7,9 +7,9 @@
 
     angular.module('app').controller('userCtrl', userCtrl);
 
-    userCtrl.$inject = ['$routeParams', 'user'];
+    userCtrl.$inject = ['user'];
 
-    function userCtrl(user, $routeParams) {
+    function userCtrl(user) {
         var vm = this;
         vm.user = user;
     }

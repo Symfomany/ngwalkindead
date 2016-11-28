@@ -32,16 +32,17 @@
 
     <div class="col s12 cards-container">
         <div id="users" masonry='{ "transitionDuration" : "0.4s" , "itemSelector" : ".tile"}'>
-            <div masonry-tile class="card blue-grey darken-1" ng-repeat="user in main.users|filter: main.search track by user.id">
+            <div masonry-tile class="card blue-grey darken-1" ng-repeat="user in main.users|filter: main.search|supAge:main.age track by user.id">
                 <div class="card-content white-text">
-                    <h3 class="card-title"><i class="material-icons">cake</i> {{ user.pseudo }} <span class="badge">{{ main.displayAge(user.naissance) }} ans</span></h3>
-                    <p>Sexe: {{ user.sexe }}</p>
+                    <h3 class="card-title">{{ user.pseudo }} <span class="badge">{{ user.naissance|age }} ans</span></h3>
+                    <p ng-if="user.naissance|ageMonth"><i class="material-icons">cake</i> C'est son anniversaire! </p>
+                    <p>Sexe: {{ user.sexe|sexe }}</p>
                     <img class="responsive-img  col s7" ng-src="{{ user.photo }}" />
                     <p><small>{{ user.resume }}</small></p>
 
                 </div>
                 <div class="card-action">
-                    <a href="#/user/{{ user.pseudo }}"><i class="material-icons">search</i> Voir le profil</a>
+                    <a href="#/user/{{ user.id }}"><i class="material-icons">search</i> Voir le profil</a>
                     <a ng-click="main.remove(user)"><i class="material-icons">highlight_off</i> Supprimer</a>
                 </div>
             </div>
@@ -56,11 +57,11 @@
         <!-- Modal Structure -->
         <h3>Ajout de personnage</h3>
         <section class="col m12">
-            <form name="addPerso" novalidate ng-submit="ajout.ajouterPerso()">
+            <form name="addPerso" novalidate ng-submit="main.add()">
                 <div class="formulaire">
                     <div class="row">
                         <div input-field class="col m8">
-                            <input type="text" name="pseudo" ng-model="ajout.pseudo" required ng-minlength="2" ng-maxlength="30" length="30">
+                            <input type="text" name="pseudo" ng-model="main.pseudo" required ng-minlength="2" ng-maxlength="30" length="30">
                             <label>Prénom et nom</label>
                             <span class="text-danger" ng-show="addPerso.pseudo.$error.required">
                     Champ obligatoire
@@ -70,7 +71,7 @@
                             Sexe :
                             <label>
                     Femme
-                    <input type="checkbox" value="true" ng-model="ajout.sexe">
+                    <input type="checkbox" value="true" ng-model="main.sexe">
                     <span class="lever"></span>
                     Homme
                 </label>
@@ -78,7 +79,7 @@
                     </div>
                     <div class="row">
                         <div input-field class="col m6">
-                            <input type="text" name="activite" ng-model="ajout.activite" required>
+                            <input type="text" name="activite" ng-model="main.activite" required>
                             <label>Activité</label>
                             <span class="text-danger" ng-show="addPerso.activite.$error.required">
                     Champ obligatoire
@@ -91,7 +92,7 @@
                     </div>
                     <div class="row">
                         <div input-field class="col m12">
-                            <input type="text" name="url" ng-model="ajout.photo" required>
+                            <input type="text" name="url" ng-model="main.photo" required>
                             <label>Url de la photo</label>
                             <span class="text-danger" ng-show="addPerso.url.$error.required">
                     Champ obligatoire
@@ -100,21 +101,21 @@
                     </div>
                     <div class="row">
                         <div input-field class="col m6">
-                            <input type="text" name="pays" ng-model="ajout.pays" required>
+                            <input type="text" name="pays" ng-model="main.pays" required>
                             <label>Pays</label>
                             <span class="text-danger" ng-show="addPerso.pays.$error.required">
                     Champ obligatoire
                 </span>
                         </div>
                         <div input-field class="col m3">
-                            <input type="text" name="lat" ng-model="ajout.lat" required>
+                            <input type="text" name="lat" ng-model="main.lat" required>
                             <label>Latitude</label>
                             <span class="text-danger" ng-show="addPerso.lat.$error.required">
                     Champ obligatoire
                 </span>
                         </div>
                         <div input-field class="col m3">
-                            <input type="text" name="long" ng-model="ajout.long" required>
+                            <input type="text" name="long" ng-model="main.long" required>
                             <label>Longitude</label>
                             <span class="text-danger" ng-show="addPerso.long.$error.required">
                     Champ obligatoire
@@ -123,26 +124,26 @@
                     </div>
                     <div class="row">
                         <div input-field class="col m12">
-                            <textarea ng-model="ajout.bio" class="materialize-textarea"></textarea>
+                            <textarea ng-model="main.bio" class="materialize-textarea"></textarea>
                             <label>Biographie</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col m8">
                             <span class="saisons">Saisons : </span>
-                            <input type="checkbox" ng-model="ajout.saisons.s1" id="s1" />
+                            <input type="checkbox" ng-model="main.saisons.s1" id="s1" />
                             <label for="s1">1</label>
-                            <input type="checkbox" ng-model="ajout.saisons.s2" id="s2" />
+                            <input type="checkbox" ng-model="main.saisons.s2" id="s2" />
                             <label for="s2">2</label>
-                            <input type="checkbox" ng-model="ajout.saisons.s3" id="s3" />
+                            <input type="checkbox" ng-model="main.saisons.s3" id="s3" />
                             <label for="s3">3</label>
-                            <input type="checkbox" ng-model="ajout.saisons.s4" id="s4" />
+                            <input type="checkbox" ng-model="main.saisons.s4" id="s4" />
                             <label for="s4">4</label>
-                            <input type="checkbox" ng-model="ajout.saisons.s5" id="s5" />
+                            <input type="checkbox" ng-model="main.saisons.s5" id="s5" />
                             <label for="s5">5</label>
-                            <input type="checkbox" ng-model="ajout.saisons.s6" id="s6" />
+                            <input type="checkbox" ng-model="main.saisons.s6" id="s6" />
                             <label for="s6">6</label>
-                            <input type="checkbox" ng-model="ajout.saisons.s7" id="s7" />
+                            <input type="checkbox" ng-model="main.saisons.s7" id="s7" />
                             <label for="s7">7</label>
                         </div>
                         <div class="col m4">

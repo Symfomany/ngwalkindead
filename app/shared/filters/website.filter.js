@@ -32,4 +32,82 @@
         }
     }
 
+
+
+    /**
+     * 3eme syntax
+     * Filter Age calculate
+     */
+
+    angular.module('app').filter('age', age);
+
+    function age() {
+
+        return function(input) {
+            return moment().diff(moment(input, 'DD/MM/YYYY'), 'years');
+        }
+    }
+
+
+    /**
+     * 3eme syntax
+     * Filter Age Month
+     */
+
+    angular.module('app').filter('ageMonth', ageMonth);
+
+    function ageMonth() {
+
+        return function(input) {
+            var now = moment().format("MM");
+            var userMonth = moment(input, "DD/MM/YYYY").format("MM");
+
+            if (now === userMonth) {
+                return true;
+            }
+        }
+    }
+
+
+    /**
+     * 3eme syntax
+     * Filter Age Month
+     */
+
+    angular.module('app').filter('sexe', sexe);
+
+    function sexe() {
+
+        return function(sexe) {
+            console.log();
+            if (sexe === false) {
+                return "Femme";
+            }
+            return "Homme";
+
+        };
+    }
+
+    /**
+     * 3eme syntax
+     * Filter Age Month
+     */
+
+    angular.module('app').filter('supAge', supAge);
+
+    function supAge() {
+
+        return function(tableau, ageUser) {
+            if (ageUser === undefined || ageUser === null) {
+                return tableau;
+            }
+            return _.filter(tableau, function(use) {
+                return moment().diff(moment(use.naissance, 'DD/MM/YYYY'), 'years') >= ageUser;
+            });
+
+        };
+    }
+
+
+
 }());

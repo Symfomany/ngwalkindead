@@ -23,6 +23,7 @@
     "angular-material": "^1.1.1",
     "angular-masonry": "^0.16.0",
     "angular-masonry-directive": "*",
-    "moment": "^2.17.0"
+    "moment": "^2.17.0",
+    "lodash": "^4.17.2"
   }
 }
