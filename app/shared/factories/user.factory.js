@@ -1,7 +1,7 @@
 /**
  * Contact Controller
  */
-(function() {
+(function () {
 
     "use strict";
 
@@ -30,8 +30,8 @@
          */
         function getAll() {
             var deferred = $q.defer();
-            $http.get("http://localhost:3000/db")
-                .success(function(data) {
+            $http.get("http://localhost:3000/data")
+                .success(function (data) {
                     deferred.resolve(data);
                     $log.info('API chargee :)');
                 }).error(deferred.reject);
@@ -43,8 +43,8 @@
          */
         function getOne(pseudo) {
             var deferred = $q.defer();
-            $http.get("http://localhost:3000/" + pseudo)
-                .success(function(data) {
+            $http.get("http://localhost:3000/data/" + pseudo)
+                .success(function (data) {
                     deferred.resolve(data);
                 }).error(deferred.reject);
             return deferred.promise; //return a promise with $q library (not exist in ES5)
@@ -57,13 +57,8 @@
         function addOne(obj) {
             var deferred = $q.defer();
 
-            $http({
-                    url: '/http://localhost:3000/',
-                    method: "POST",
-                    data: JSON.stringify(obj),
-                    headers: { 'Content-Type': 'application/json' }
-                })
-                .success(function(data) {
+            $http.post('http://localhost:3000/data/', obj)
+                .success(function (data) {
                     deferred.resolve(data);
                 }).error(deferred.reject);
             return deferred.promise; //return a promise with $q library (not exist in ES5)
@@ -75,8 +70,9 @@
          */
         function removeOne(id) {
             var deferred = $q.defer();
-            $http.delete("http://localhost:3000/" + id)
-                .success(function(data) {
+            console.log(id);
+            $http.delete("http://localhost:3000/data/" + id)
+                .success(function (data) {
                     deferred.resolve(data);
                 }).error(deferred.reject);
             return deferred.promise; //return a promise with $q library (not exist in ES5)
@@ -87,4 +83,4 @@
 
 
 
-}());
+} ());

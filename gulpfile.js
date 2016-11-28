@@ -35,6 +35,7 @@ let templateCache = require('gulp-angular-templatecache');
 
 //init tyo reload brower
 var reload = browserSync.reload;
+var validator = require('is-my-json-valid/require')
 
 
 /**
@@ -58,7 +59,7 @@ function handleError(err) {
 
 
 // Browser-sync task, only cares about compiled CSS
-gulp.task('browser-sync', function() {
+gulp.task('browser-sync', function () {
     browserSync({
         port: 8066,
         server: {
@@ -69,12 +70,12 @@ gulp.task('browser-sync', function() {
 });
 
 // reload a server
-gulp.task('browser-reload', function() {
+gulp.task('browser-reload', function () {
     reload({ stream: true });
 });
 
 // Clean log, comments, remove old files
-gulp.task('clean', function() {
+gulp.task('clean', function () {
     return gulp.src(['dist/css', 'dist/js', 'dist/images'], { read: false })
         .pipe(clean());
 });
@@ -84,7 +85,7 @@ gulp.task('clean', function() {
  * Compress images
  * @return {Stream}
  */
-gulp.task('images', ['clean-images'], function() {
+gulp.task('images', ['clean-images'], function () {
     return gulp
         .src('./images')
         .pipe(imagemin({ optimizationLevel: 4 }))
@@ -93,7 +94,7 @@ gulp.task('images', ['clean-images'], function() {
 
 
 // Sass task, will run when any SCSS files change.
-gulp.task('css', function() {
+gulp.task('css', function () {
     return gulp.src('sass/main.scss')
         .pipe(plumber({
             errorHandler: notify.onError("Error: <%= error.message %>")
@@ -112,7 +113,15 @@ gulp.task('css', function() {
 });
 
 //For js
-gulp.task('js', function() {
+gulp.task('js', function () {
+    var validate = validator('./data/walkindead.json')
+    if (!validate.errors) {
+        notify("Aucune erreur JSON")
+    } else {
+        notify(JSON.stringify(validate.errors))
+    }
+
+
     // Order By initi, filters, controllers...
     return gulp.src([ //ordre a respecter
         "app/app.js",
@@ -124,7 +133,7 @@ gulp.task('js', function() {
         "app/**/*.controller.js" //all controllers
     ]).on('error', handleError)
 
-    .pipe(jshint()).on('error', handleError)
+        .pipe(jshint()).on('error', handleError)
         .pipe(plumber({
             errorHandler: notify.onError("Error: <%= error.message %>")
         })) // débogage de mes pipes
@@ -141,7 +150,7 @@ gulp.task('js', function() {
 
 
 // Images
-gulp.task('images', function() {
+gulp.task('images', function () {
     return gulp.src('assets/images/**/*')
         .pipe(cache(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true })))
         .pipe(reload({ stream: true }))
@@ -151,7 +160,7 @@ gulp.task('images', function() {
 
 
 // Default task to be run with `gulp`
-gulp.task('default', ['browser-sync', 'css', 'js'], function() {
+gulp.task('default', ['browser-sync', 'css', 'js'], function () {
     gulp.watch("sass/**/*.scss", ['css']); // watch permet de regarder les changements de fichier et lancer les tâches que l'on souhaite
     // gulp.watch("assets/images/", ['images']);
     gulp.watch(["app/**/**/*.js", "app/**/*.js", "app/*.js"], ['js']);
