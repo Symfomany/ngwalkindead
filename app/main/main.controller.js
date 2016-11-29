@@ -63,7 +63,6 @@
         function add() {
 
             var userAdded = {
-                "id": vm.users.length + 1,
                 "pseudo": vm.pseudo,
                 "sexe": vm.sexe,
                 "photo": vm.photo,
@@ -91,12 +90,14 @@
                 vm.bio = "";
                 vm.saisonsSelect = [];
 
+                $mdDialog.hide();
+
 
             });
 
         }
 
-        function displayAge(dateBirth) {};
+        function displayAge(dateBirth) { };
 
         function remove(user) {
             Materialize.toast(user.pseudo + " est mort... ", 4000);
@@ -112,4 +113,4 @@
 
     }
 
-}());
+} ());

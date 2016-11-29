@@ -114,6 +114,7 @@ gulp.task('css', function () {
 
 //For js
 gulp.task('js', function () {
+
     var validate = validator('./data/walkindead.json')
     if (!validate.errors) {
         notify("Aucune erreur JSON")

@@ -26,6 +26,10 @@ Start JSON Server
 * SASS
 * Service, Factory, Directive & Filters
 
+
+![enter image description here](./images/app.png)
+
+
 ![enter image description here](./images/preview.png)
 
 

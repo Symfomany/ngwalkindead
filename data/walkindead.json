@@ -110,45 +110,21 @@
       ]
     },
     {
-      "id": 6,
-      "pseudo": "Michonne",
-      "sexe": false,
-      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Danai_Gurira_by_Gage_Skidmore.jpg/200px-Danai_Gurira_by_Gage_Skidmore.jpg",
-      "activite": "Badass",
-      "naissance": "14/02/1978",
-      "coord": {
-        "lat": "45.708030",
-        "long": "4.995003"
-      },
-      "pays": "USA",
-      "resume": "Quand elle est emmenée avec Andrea à Woodbury, elle devient immédiatement soupçonneuse de la personnalité du Gouverneur. Elle est méfiante et observatrice : elle devine que le Gouverneur a tué des hommes simplement en observant des véhicules militaires criblés de balles, volés à des soldats survivants de la Garde Nationale par lui et ses hommes, et découvre qu'il capture également des rôdeurs pour divertir les habitants de Woodbury dans des jeux sanglants. Elle s'échappe de Woodbury en laissant Andréa et est prise en chasse par Merle Dixon et trois des hommes du Gouverneur. Elle déjoue leur plan en tuant deux de ces derniers, mais elle est blessée par balle à la cuisse gauche par Merle lors de sa fuite. Cependant, Merle parvient à capturer Glenn et Maggie.",
-      "saison": [
-        3,
-        4,
-        5,
-        6,
-        7
-      ]
-    },
-    {
-      "id": 7,
-      "pseudo": "sdqsdqs",
+      "id": 8,
+      "pseudo": "Carol Peletier",
       "sexe": true,
-      "photo": "http://www.planetecampus.com/wp-content/uploads/2016/04/av.jpg",
-      "activite": "Scheriff",
-      "naissance": "29/11/1970",
+      "photo": "https://upload.wikimedia.org/wikipedia/en/8/80/CarolPeletier.jpg",
+      "activite": "Soldat Tueur",
+      "naissance": "15/11/2016",
       "coord": {
-        "lat": "4.850198",
-        "long": "45.775107"
+        "lat": "45.991471",
+        "long": "4.718821"
       },
       "pays": "France",
-      "resume": "ig idfhghifdhgidhfig hfdig idfg hiudf higu dfiughdih giudf high idfgig idfhghifdhgidhfig hfdig idfg hiudf higu dfiughdih giudf high idfgig idfhghifdhgidhfig hfdig idfg hiudf higu dfiughdih giudf high idfgig idfhghifdhgidhfig hfdig idfg hiudf higu dfiughdih giudf high idfg",
+      "resume": "kjfhbkshdfh sdfod ihsdiuishishf hsuihfuisdf hsdui hsdfdsisihfuisdhifuikjfhbkshdfh sdfod ihsdiuishishf hsuihfuisdf hsdui hsdfdsisihfuisdhifuikjfhbkshdfh sdfod ihsdiuishishf hsuihfuisdf hsdui hsdfdsisihfuisdhifuikjfhbkshdfh sdfod ihsdiuishishf hsuihfuisdf hsdui hsdfdsisihfuisdhifui",
       "saison": [
-        "s3",
-        "s4",
-        "s8",
-        "s6",
-        "s10"
+        "s1",
+        "s3"
       ]
     }
   ]
