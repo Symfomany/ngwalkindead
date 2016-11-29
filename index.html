@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" ng-app="app" ng-cloak>
+<html lang="fr" ng-app="app">
 
 <head>
     <meta charset="utf-8">
@@ -28,6 +28,8 @@
 
     <!-- Librairie Angular Animate -->
     <script src="bower_components/angular-animate/angular-animate.js" charset="utf-8"></script>
+    <script src="bower_components/angular-aria/angular-aria.min.js" charset="utf-8"></script>
+    <script src="bower_components/angular-messages/angular-messages.min.js" charset="utf-8"></script>
     <script src="bower_components/angular-aria/angular-aria.min.js" charset="utf-8"></script>
     <script src="bower_components/angular-messages/angular-messages.min.js" charset="utf-8"></script>
     <script src="bower_components/angular-material/angular-material.min.js" charset="utf-8"></script>
@@ -77,6 +79,9 @@
             offset: 200
         }];
         Materialize.scrollFire(options);
+        $(document).ready(function() {
+            $('ul.tabs').tabs();
+        });
     </script>
     <!-- My Css -->
     <link rel="stylesheet" href="./dist/css/main.min.css" media="screen" title="no title" charset="utf-8">
@@ -91,7 +96,7 @@
     <!--All views loaded here-->
     <!-- angular templating -->
     <div class="container">
-        <div class="page" ng-view></div>
+        <div class="page" ng-cloak ng-view></div>
     </div>
 </body>
 

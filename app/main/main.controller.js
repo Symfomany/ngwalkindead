@@ -7,83 +7,79 @@
 
     angular.module('app').controller('mainCtrl', mainCtrl);
 
-    mainCtrl.$inject = ['users', 'UserFcty'];
+    mainCtrl.$inject = ['users', 'UserFcty', '$mdDialog'];
 
     /**
      * Include a Factory: Best Practise
      * Factory Resolving by Routing.
      * Cela signifie que la Factory est chargé avant que la page se charge
      */
-    function mainCtrl(users, UserFcty) {
+    function mainCtrl(users, UserFcty, $mdDialog, $scope) {
         var vm = this;
 
-        vm.myDate = new Date();
-
-        vm.minDate = new Date(
-            vm.myDate.getFullYear(),
-            vm.myDate.getMonth() - 2,
-            vm.myDate.getDate());
-
-        vm.maxDate = new Date(
-            vm.myDate.getFullYear(),
-            vm.myDate.getMonth() + 2,
-            vm.myDate.getDate());
-
-        vm.onlyWeekendsPredicate = function(date) {
-            var day = date.getDay();
-            return day === 0 || day === 6;
+        vm.showPrerenderedDialog = function(ev) {
+            $mdDialog.show({
+                controller: mainCtrl,
+                contentElement: '#myDialog',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true
+            });
         };
-        vm.title = "Hello Angular by StyleGuide";
+        vm.cancel = function() {
+            $mdDialog.cancel();
+        };
+        vm.hide = function() {
+            $mdDialog.hide();
+        };
+        vm.cancel = function() {
+            $mdDialog.cancel();
+        };
+        vm.answer = function(answer) {
+            $mdDialog.hide(answer);
+        };
+
+
         vm.users = users;
         vm.add = add;
         vm.displayAge = displayAge;
         vm.remove = remove;
-        vm.age = 18;
+        vm.age = 10;
+        vm.naissance = new Date();
         vm.sexe = true;
-        vm.saisons = {
-            's1': false,
-            's2': false,
-            's3': false,
-            's4': false,
-            's5': false,
-            's6': false,
-            's7': false
-        };
+        vm.saisons = [
+            's1',
+            's2',
+            's3',
+            's4',
+            's5',
+            's6',
+            's7',
+            's8',
+            's9',
+            's10'
+        ];
 
         function add() {
 
-            vm.saisonsArr = [];
-
-            if (vm.saisons.s1 === true) { vm.saisonsArr.push(1); }
-            if (vm.saisons.s2 === true) { vm.saisonsArr.push(2); }
-            if (vm.saisons.s3 === true) { vm.saisonsArr.push(3); }
-            if (vm.saisons.s4 === true) { vm.saisonsArr.push(4); }
-            if (vm.saisons.s5 === true) { vm.saisonsArr.push(5); }
-            if (vm.saisons.s6 === true) { vm.saisonsArr.push(6); }
-            if (vm.saisons.s7 === true) { vm.saisonsArr.push(7); }
-
-
             var userAdded = {
-                "id": 8,
+                "id": vm.users.length + 1,
                 "pseudo": vm.pseudo,
                 "sexe": vm.sexe,
                 "photo": vm.photo,
                 "activite": vm.activite,
-                "naissance": vm.naissance,
+                "naissance": moment(vm.naissance).format('DD/MM/YYYY'),
                 "coord": {
                     "lat": vm.lat,
                     "long": vm.long
                 },
                 "pays": vm.pays,
                 "resume": vm.bio,
-                "saison": vm.saisonsArr
+                "saison": vm.saisonsSelect
             };
 
-
-            UserFcty.add(vm.userAdded).then(function() {
-                vm.users.push(vm.userAdded);
-                // On reinitialise le formulaire
-                // TODO: in objet because for..of and null
+            UserFcty.add(userAdded).then(function() {
+                vm.users.push(userAdded);
                 vm.pseudo = "";
                 vm.sexe = true;
                 vm.activite = "";
@@ -93,20 +89,14 @@
                 vm.lat = "";
                 vm.long = "";
                 vm.bio = "";
-                vm.saisons = {
-                    's1': false,
-                    's2': false,
-                    's3': false,
-                    's4': false,
-                    's5': false,
-                    's6': false,
-                    's7': false
-                };
+                vm.saisonsSelect = [];
+
+
             });
 
         }
 
-        function displayAge(dateBirth) { };
+        function displayAge(dateBirth) {};
 
         function remove(user) {
             Materialize.toast(user.pseudo + " est mort... ", 4000);
@@ -122,4 +112,4 @@
 
     }
 
-} ());
+}());

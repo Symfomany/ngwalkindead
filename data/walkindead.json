@@ -129,6 +129,27 @@
         6,
         7
       ]
+    },
+    {
+      "id": 7,
+      "pseudo": "sdqsdqs",
+      "sexe": true,
+      "photo": "http://www.planetecampus.com/wp-content/uploads/2016/04/av.jpg",
+      "activite": "Scheriff",
+      "naissance": "29/11/1970",
+      "coord": {
+        "lat": "4.850198",
+        "long": "45.775107"
+      },
+      "pays": "France",
+      "resume": "ig idfhghifdhgidhfig hfdig idfg hiudf higu dfiughdih giudf high idfgig idfhghifdhgidhfig hfdig idfg hiudf higu dfiughdih giudf high idfgig idfhghifdhgidhfig hfdig idfg hiudf higu dfiughdih giudf high idfgig idfhghifdhgidhfig hfdig idfg hiudf higu dfiughdih giudf high idfg",
+      "saison": [
+        "s3",
+        "s4",
+        "s8",
+        "s6",
+        "s10"
+      ]
     }
   ]
 }

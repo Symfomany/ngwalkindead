@@ -238,3 +238,113 @@ $medium-only: "only screen and (min-width : #{$small-screen-up}) and (max-width 
     color: #dd2c00;
     margin-left: 15px;
 }
+
+.inputdemoErrors .inputErrorsApp {
+    min-height: 48px;
+}
+
+.inputdemoErrors md-input-container>p {
+    font-size: 0.8em;
+    text-align: left;
+    width: 100%;
+}
+
+.dialogdemoBasicUsage #popupContainer {
+    position: relative;
+}
+
+.dialogdemoBasicUsage .footer {
+    width: 100%;
+    text-align: center;
+    margin-left: 20px;
+}
+
+.dialogdemoBasicUsage .footer,
+.dialogdemoBasicUsage .footer>code {
+    font-size: 0.8em;
+    margin-top: 50px;
+}
+
+.dialogdemoBasicUsage button {
+    width: 200px;
+}
+
+.dialogdemoBasicUsage div#status {
+    color: #c60008;
+}
+
+.dialogdemoBasicUsage .dialog-demo-prerendered md-checkbox {
+    margin-bottom: 0;
+}
+
+.navBardemoBasicUsage md-content .ext-content {
+    padding: 50px;
+    margin: 20px;
+    background-color: #FFF2E0;
+}
+
+.radioButtondemoBasicUsage body {
+    padding: 20px;
+}
+
+.radioButtondemoBasicUsage hr {
+    margin-left: -20px;
+    opacity: 0.3;
+}
+
+.radioButtondemoBasicUsage md-radio-group {
+    width: 150px;
+}
+
+.radioButtondemoBasicUsage p:last-child {
+    padding-bottom: 50px;
+}
+
+.radioButtondemoBasicUsage [ng-controller] {
+    padding: 0 20px;
+}
+
+.radioButtondemoBasicUsage .radioValue {
+    margin-left: 5px;
+    color: #0f9d58;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.radioButtondemoBasicUsage md-icon {
+    margin: 0 20px 20px;
+    width: 128px;
+    height: 128px;
+}
+
+.radioButtondemoBasicUsage .ipsum {
+    color: saddlebrown;
+    font-size: 0.9em;
+}
+
+.selectdemoSelectHeader {
+    /* Please note: All these selectors are only applied to children of elements with the 'selectdemoSelectHeader' class */
+}
+
+.selectdemoSelectHeader .demo-header-searchbox {
+    border: none;
+    outline: none;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+}
+
+.selectdemoSelectHeader .demo-select-header {
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1), 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0, 0, 0, 0.12);
+    padding-left: 10.667px;
+    height: 48px;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: auto;
+}
+
+.selectdemoSelectHeader md-content._md {
+    max-height: 240px;
+}

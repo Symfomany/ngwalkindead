@@ -1,7 +1,7 @@
 /**
  * Configure your app...
  */
-(function () {
+(function() {
 
     "use strict";
 
@@ -12,11 +12,11 @@
      * Create constants for global variables in projects
      */
     angular.module('app', ['ngAnimate', 'ngMaterial', 'ngMessages', 'masonry'])
-        .config(function ($compileProvider, $logProvider) {
+        .config(function($compileProvider, $logProvider) {
             $compileProvider.debugInfoEnabled(true);
             $logProvider.debugEnabled(true);
 
         });
 
 
-} ());
+}());

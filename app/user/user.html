@@ -1,8 +1,11 @@
 <h1>{{ main.user.pseudo}}</h1>
-<p>{{ main.user.resume}}</p>
-<p>{{ main.user.naissance|age }} ans</p>
-<p>{{ main.user.naissance }}</p>
-<img class="responsive-img  col s7" ng-src="{{ user.photo }}" />
-<p>Sexe: {{ main.user.sexe|sexe }}</p>
-<p>Pays: {{ main.user.pays }}</p>
-<p>Saison: {{ main.user.saison.join(', ') }}</p>
+<hr />
+<div class="card-panel teal">
+    <p>{{ main.user.resume}}</p>
+    <p>{{ main.user.naissance|age }} ans</p>
+    <p>{{ main.user.naissance }}</p>
+    <img class="responsive-img  col s7" ng-src="{{ main.user.photo }}" />
+    <p>Sexe: {{ main.user.sexe|sexe }}</p>
+    <p>Pays: {{ main.user.pays }}</p>
+    <p>Saison: {{ main.user.saison.join(', ') }}</p>
+</div>
